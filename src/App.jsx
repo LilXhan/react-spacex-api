@@ -1,26 +1,19 @@
-import { Heading, Image } from '@chakra-ui/react';
-import LaunchItem from './components/LaunchItem';
+import { Routes, Route } from 'react-router-dom';
+import LaunchList from './components/LaunchList';
+import LaunchDetails from './components/LaunchDetail';
+import { Image } from '@chakra-ui/react';
 
-import * as API from './services/launches'
-import logo from './assets/logo.png'
-
+import logo from './assets/react.svg'
 
 
 function App() {
-
-  const { launches } = API.getAllLaunches();
-
   return (
     <>
-      <Image m={4} src={logo} width={300} />
-      <Heading as="h1" size='lg' textAlign="center"> 
-        Spacex Launches
-      </Heading>
-      <section>
-          {launches?.map((launch, index) => (
-            <LaunchItem key={index} {...launch}></LaunchItem>
-          ))}
-      </section>
+      <Image m={4} src={logo} />
+      <Routes>
+        <Route path='/' element={<LaunchList />} />
+        <Route path='launch/:launchId' element={<LaunchDetails />} />
+      </Routes>
     </>
   )
 }
